@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+
   before_action :ensure_current_user_is_owner, only: [:destroy, :update, :edit]
 
   # GET /comments or /comments.json
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     respond_to do |format|
-      format.js
+      format.html
     end
   end
 
@@ -30,15 +31,11 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.js
-      #   format.html { redirect_back fallback_location: root_path, notice: "Comment was successfully created." }
-      #   format.json { render :show, status: :created, location: @comment }
-      #   format.js do
-      #     render template: "comments/create"
-      #   end
-      # else
-      #   format.html { render :new, status: :unprocessable_entity }
-      #   format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.html { redirect_back fallback_location: root_path, notice: "Comment was successfully created." }
+        format.json { render :show, status: :created, location: @comment }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,7 +57,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.js
+      format.html { redirect_back fallback_location: root_url, notice: "Comment was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
 
