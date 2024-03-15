@@ -7,3 +7,5 @@ $("#<%= dom_id(@comment.photo) %>_new_comment_form").before(added_comment);
 added_comment.fadeIn(500, function() {
 $(this).show();
 });
+
+$("#<%= dom_id(@comment.photo) %>_new_comment_form #comment_body").val("");
