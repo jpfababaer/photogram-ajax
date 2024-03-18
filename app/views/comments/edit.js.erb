@@ -1,2 +1,2 @@
-let form = $("<%= escape_javascript(render 'comments/form', comment: @comment) %>");
+var form = $("<%= escape_javascript(render 'comments/form', comment: @comment) %>");
 $("#<%= dom_id(@comment) %>").replaceWith(form);
