@@ -1,0 +1,5 @@
+$("#<%= dom_id(@comment) %>").fadeOut(500, function() {
+$(this).remove();
+});
+
+$("#<%= dom_id(@comment.photo) %>_new_comment_form #comment_body").val("");

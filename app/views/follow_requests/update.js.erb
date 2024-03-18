@@ -1,0 +1,3 @@
+var existingUserSection = $("#user_top_section");
+var updatedUserSection = $("<%= j(render "users/user", user: @follow_request.sender) %>");
+existingUserSection.replaceWith(updatedUserSection);
